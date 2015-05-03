@@ -1,15 +1,24 @@
-var path      = require('path');
-var rootPath  = path.normalize(__dirname + '/../');
+var path = require('path');
+var rootPath = path.normalize(__dirname + '/../');
 
 var environments = {
   dev: {
     rootPath: rootPath,
-    db: '',
+    db: {
+      host: 'localhost',
+      name: 'garcondb',
+      user: 'root',
+      password: ''
+    },
     port: process.env.PORT || 3000
   },
-  staging:{
+  staging: {
     rootPath: rootPath,
-    db: '',
+    db: {
+      host: 'localhost',
+      user: 'me',
+      password: 'secret'
+    },
     port: process.env.PORT || 3000
   },
   prod: {
