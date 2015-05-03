@@ -6,7 +6,7 @@
   "eqeqeq": true,
   "es5": true,
   "freeze": true,
-  "latedef": true,
+  "latedef": false,
   "maxparams": 3,
   "immed": true,
   "indent": 2,
