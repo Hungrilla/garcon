@@ -86,9 +86,6 @@
     "afterConsequent": true,
     "beforeAlternate": true
   },
-  "requireSpacesInFunction": {
-    "beforeOpeningCurlyBrace": true
-  },
   "validateParameterSeparator": ", ",
   "validateQuoteMarks": {
     "mark": "'",

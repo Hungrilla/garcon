@@ -1,6 +1,5 @@
-/**
- * Created by umayr on 03/05/15.
- */
+'use strict';
+
 var config = {
   baseURL: '/api'
 };
