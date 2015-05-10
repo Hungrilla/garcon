@@ -46,15 +46,15 @@ function rehydrateToken(claims){
  * @return {string} claims - claims object from the payload.
  */
 function createClaims(payload){
-  if(!payload.email || !payload.accessToken){
+  if(!payload.userId || !payload.accessToken){
     return false;
   }
   else{
     return {
       issuer: tokenConfig.issuer,
       expiresInMinutes: tokenConfig.expiryInMinutes,
-      subject: payload.email,
+      subject: payload.userId,
       accessToken: payload.accessToken
-    }
+    };
   }
 }
