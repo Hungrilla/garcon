@@ -1,9 +1,11 @@
 'use strict';
 
 var authHelper = require('../helpers/auth');
+var request = require('request');
 
 module.exports = {
-  authIsValid: authIsValid
+  authIsValid: authIsValid,
+  fbAuthValid: fbAuthValid
 };
 
 /**
@@ -21,9 +23,28 @@ function authIsValid(req, res, next){
   }
   else{
     req.user = {
-      email: claims.email,
+      userId: claims.subject,
       thirdPartyAccessToken: claims.accessToken
     };
     next();
   }
+}
+
+/**
+ * Middleware - verifies Facebook accessToken
+ * @method
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - Callback for the next function.
+ */
+function fbAuthValid(req, res, next){
+  var url = 'https://graph.facebook.com/me?access_token=' + req.body.accessToken;
+  request(url, function (error, response) {
+    if (!error && response.statusCode == 200) {
+      next();
+    }
+    else{
+      res.status(401).send();
+    }
+  });
 }
