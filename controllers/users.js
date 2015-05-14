@@ -8,12 +8,10 @@ var authMW = require('../middlewares/auth');
 module.exports = controller;
 
 function controller(app){
-  // # Middleware
-  //route.use(auth.authIsValid);
 
   // # Routes
-  route.get('/users/:id',authMW.authIsValid, getUser);
-  route.get('/users', authMW.authIsValid, getUsers);
+  route.get('/users/:id', authMW.gcAuthValid, getUser);
+  route.get('/users', authMW.gcAuthValid, getUsers);
 
   routeHelper.register(app, route);
 
