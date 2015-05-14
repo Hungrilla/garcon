@@ -26,7 +26,12 @@ function sign(payload){
  * @return {object} claims - returns the claims object from the token.
  */
 function verify(token){
-  return jwt.verify(token, tokenConfig.apiSecret);
+  try{
+    return jwt.verify(token, tokenConfig.apiSecret);
+  }
+  catch(exception){
+    return false;
+  }
 }
 
 /**

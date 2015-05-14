@@ -4,7 +4,7 @@ var authHelper = require('../helpers/auth');
 var request = require('request');
 
 module.exports = {
-  authIsValid: authIsValid,
+  gcAuthValid: gcAuthValid,
   fbAuthValid: fbAuthValid
 };
 
@@ -15,11 +15,11 @@ module.exports = {
  * @param {object} res - Express response object.
  * @param {function} next - Callback for the next function.
  */
-function authIsValid(req, res, next){
+function gcAuthValid(req, res, next){
   var accessToken = req.headers['x-auth'];
   var claims = authHelper.verify(accessToken);
   if(!claims){
-    res.status(404).json('Access denied: Invalid Token');
+    res.status(401).json('Access denied: Invalid Token');
   }
   else{
     req.user = {
@@ -39,8 +39,8 @@ function authIsValid(req, res, next){
  */
 function fbAuthValid(req, res, next){
   var url = 'https://graph.facebook.com/me?access_token=' + req.body.accessToken;
-  request(url, function (error, response) {
-    if (!error && response.statusCode == 200) {
+  request(url, function (error, response){
+    if(!error && response.statusCode === 200){
       next();
     }
     else{
