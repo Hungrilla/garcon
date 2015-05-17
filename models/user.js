@@ -1,12 +1,20 @@
 'use strict';
 
 var Sequelize = require('sequelize');
+var User;
 
-module.exports = function(sequelize){
-  var User = sequelize.define('user', {
+module.exports = {
+  init: init,
+  findOrCreate: findOrCreate,
+  create: create
+};
+
+function init(sequelize){
+  User = sequelize.define('user', {
     id: {
       type: Sequelize.UUID,
-      primaryKey: true
+      primaryKey: true,
+      defaultValue: Sequelize.UUIDV4
     },
     email:{
       type: Sequelize.STRING,
@@ -31,3 +39,17 @@ module.exports = function(sequelize){
 
   return User;
 };
+
+function findOrCreate(user){
+  var where = {
+    email: user.email
+  };
+  var defaults = {
+    defaults: user
+  };
+  return User.findOrCreate(where, defaults);
+};
+
+function create(user){
+  return User.create(user);
+}

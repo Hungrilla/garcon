@@ -41,6 +41,7 @@ function fbAuthValid(req, res, next){
   var url = 'https://graph.facebook.com/me?access_token=' + req.body.accessToken;
   request(url, function (error, response){
     if(!error && response.statusCode === 200){
+      req.user = JSON.parse(response.body);
       next();
     }
     else{

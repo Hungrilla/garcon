@@ -3,6 +3,6 @@
 module.exports = bootstrap;
 
 function bootstrap(app){
-  require('../controllers/users')(app);
+  require('../controllers/user')(app);
   require('../controllers/auth')(app);
 }
