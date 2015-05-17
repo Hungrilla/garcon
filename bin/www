@@ -11,7 +11,8 @@ var app = express();
 require('../config/express')(app, config, targetEnv);
 
 // # Setup Database
-//require('../config/sequelize')(config.db);
+var sequelize = require('../config/sequelize')(config.db);
+require('../config/models')(sequelize);
 
 // # Start Express App
 app.listen(config.port);
