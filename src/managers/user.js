@@ -14,11 +14,5 @@ module.exports = {
  * @return {object} promise - a promise to the User creation.
  */
 function findOrCreate(user){
-
-  var clause = {
-    where: {email: user.email},
-    defaults: user
-  };
-
   return User.create(user);
 }
