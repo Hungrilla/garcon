@@ -1,6 +1,7 @@
 'use strict';
 
-var User = require('../models/user');
+var User = require('../../lib/models/user');
+// TODO: Wtf?! Need to find an elegant solution that doesn't involve `../../../`
 
 module.exports = {
   findOrCreate: findOrCreate

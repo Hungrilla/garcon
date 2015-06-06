@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var route = new express.Router();
+var route = new express.Router(); // TODO: Why we're creating new router every time we create a controller?
 var routeHelper = require('../helpers/route');
 var authMW = require('../middlewares/auth');
 

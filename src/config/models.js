@@ -8,6 +8,7 @@ module.exports = models;
  * @param {object} sequelize - intance of the sequelize object.
  */
 function models(sequelize){
-  require('../models/user').init(sequelize);
+  require('../../lib/models/user').init(sequelize);
+  // TODO: `../../` again. Needs to be fixed.
 }
 
