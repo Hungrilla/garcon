@@ -4,19 +4,19 @@
 
 var express = require('express');
 var targetEnv = process.env.target || 'dev';
-var config = require('../config/environment')[targetEnv];
+var config = require('../src/config/environment')[targetEnv];
 
 // # Setup Express App
 var app = express();
-require('../config/express')(app, config, targetEnv);
+require('../src/config/express')(app, config, targetEnv);
 
 // # Setup Database
-var sequelize = require('../config/sequelize')(config.db);
-require('../config/models')(sequelize);
+var sequelize = require('../lib/conf/sequelize')();
+//require('./models')(sequelize);
 
 // # Start Express App
 app.listen(config.port);
 console.log('Garcon at your service on Port: ' + config.port);
 
 // # Bootstrap App
-require('../config/bootstrap')(app);
+require('../src/config/bootstrap')(app);
