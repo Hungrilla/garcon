@@ -1,7 +1,7 @@
 'use strict';
 
 var jwt = require('jsonwebtoken');
-var tokenConfig = require('./auth');
+var tokenConfig = require('../config/auth');
 
 module.exports = {
   sign: sign,
