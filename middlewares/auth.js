@@ -4,8 +4,8 @@ var authHelper = require('../helpers/auth');
 var request = require('request');
 
 module.exports = {
-  gcAuthValid: gcAuthValid,
-  fbAuthValid: fbAuthValid
+  garcon: garcon,
+  facebook: facebook
 };
 
 /**
@@ -15,7 +15,7 @@ module.exports = {
  * @param {object} res - Express response object.
  * @param {function} next - Callback for the next function.
  */
-function gcAuthValid(req, res, next){
+function garcon(req, res, next){
   var accessToken = req.headers['x-auth'];
   var claims = authHelper.verify(accessToken);
   if(!claims){
@@ -37,15 +37,15 @@ function gcAuthValid(req, res, next){
  * @param {object} res - Express response object.
  * @param {function} next - Callback for the next function.
  */
-function fbAuthValid(req, res, next){
+function facebook(req, res, next){
   var url = 'https://graph.facebook.com/me?access_token=' + req.body.accessToken;
   request(url, function (error, response){
-    if(!error && response.statusCode === 200){
-      req.user = JSON.parse(response.body);
+    var body = JSON.parse(response.body);
+    if((!error && response.statusCode === 200) || (!body.error)){
       next();
     }
     else{
-      res.status(401).send();
+      res.status(401).send(body.error.message);
     }
   });
 }

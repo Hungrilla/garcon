@@ -40,9 +40,9 @@ function verify(token){
  * @param {object} claims - claims object for the JWT token.
  * @return {string} JWT Token - signed JWT token
  */
-/*function rehydrateToken(claims){
+function rehydrateToken(claims){
   //some rehydrate logic for the JWT token
-}*/
+}
 
 /**
  * Create a claims object for the JWT signing.
